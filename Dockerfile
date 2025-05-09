@@ -1,17 +1,17 @@
-# Use a Windows base image
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+# Используем образ Windows Server Core
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
 
-# Set the working directory
+# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Download and install essentials
+# Скачиваем и устанавливаем необходимые компоненты
 ADD https://www.dropbox.com/scl/fi/qdyd4p9t6xoabl95n5o3g/Downloads.bat?rlkey=snr74vv1vr8k5suujugvrhjtm&dl=1 Downloads.bat
 
-# Run the batch file to install essentials
+# Запускаем батник для установки необходимых компонентов
 RUN cmd /c Downloads.bat
 
-# Copy the show.bat script into the container (make sure you have this file in your context)
+# Копируем скрипт show.bat в контейнер (убедитесь, что этот файл находится в той же директории)
 COPY show.bat .
 
-# Command to log in to AnyDesk
+# Команда для входа в AnyDesk
 CMD ["cmd", "/c", "show.bat"]
